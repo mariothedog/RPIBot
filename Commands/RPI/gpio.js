@@ -10,15 +10,27 @@ module.exports = {
 	description: "Writes to the GPIO pin specified",
 	async execute(message, args) {
 		const pinNum = args[0];
-		const turnOn = args[1];
+		let turnOn = args[1];
 		if (!pinNum || !turnOn) {
 			return false;
+		}
+		turnOn = turnOn.toLowerCase();
+
+		let writeValue = 0;
+		if (turnOn === "true") {
+			writeValue = 1;
+		}
+		else if (turnOn !== "false") {
+			writeValue = parseInt(turnOn);
+			if (isNaN(writeValue)) {
+				return false;
+			}
 		}
 
 		let errorCaught = false;
 		await axios.post(rpi_server_address, {
 			gpioPin: parseInt(pinNum),
-			writeValue: parseInt(turnOn),
+			writeValue: writeValue,
 		}).catch((error) => {
 			console.error(error);
 			errorCaught = true;
@@ -28,7 +40,7 @@ module.exports = {
 			message.reply("An error occurred!");
 		}
 		else {
-			message.reply(`GPIO pin number ${pinNum} was successfully written to with the value ${turnOn}`);
+			message.reply(`GPIO pin number ${pinNum} was successfully written to with the value ${writeValue}`);
 		}
 		return true;
 	},
