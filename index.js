@@ -1,6 +1,5 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
-const db = require("quick.db");
 
 const {
 	token,
@@ -32,22 +31,9 @@ client.once("ready", () => {
 
 client.on("message", async message => {
 	let hasPrefix = false;
-	const channelID = message.channel.id;
 
 	if (message.author.bot) {
 		return;
-	}
-
-	const reactionChannels = db.get(`reactionChannels.${message.guild.id}`);
-	if (reactionChannels && channelID in reactionChannels) {
-		const emojis = reactionChannels[channelID];
-		for (const emoji of emojis) {
-			await message.react(emoji)
-				.catch(e => {
-					console.log(`Error caught while reacting with the emoji "${emoji}":`);
-					console.log(e);
-				});
-		}
 	}
 
 	let prefixUsed;
