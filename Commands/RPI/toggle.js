@@ -4,8 +4,7 @@ const {
 } = require("../../config.json");
 
 module.exports = {
-	name: "gpio",
-	aliases: ["toggle"],
+	name: "toggle",
 	usage: "<GPIO pin number> <write value (0 or 1)>",
 	description: "Writes to the GPIO pin specified",
 	async execute(message, args) {
