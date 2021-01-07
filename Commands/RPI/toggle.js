@@ -1,6 +1,6 @@
 const axios = require("axios");
 const {
-	rpi_server_address,
+	http_server_address,
 } = require("../../config.json");
 
 module.exports = {
@@ -27,7 +27,7 @@ module.exports = {
 		}
 
 		let errorCaught = false;
-		await axios.post(rpi_server_address, {
+		await axios.post(http_server_address, {
 			gpioPin: parseInt(pinNum),
 			writeValue: writeValue,
 		}).catch((error) => {
