@@ -19,9 +19,6 @@ module.exports = {
 		await axios.post(rpi_server_address, {
 			gpioPin: parseInt(pinNum),
 			writeValue: parseInt(turnOn),
-		}).then((res) => {
-			console.log(`statusCode: ${res.statusCode}`);
-			console.log(res);
 		}).catch((error) => {
 			console.error(error);
 			errorCaught = true;
