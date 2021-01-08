@@ -1,7 +1,7 @@
 const axios = require("axios");
 const {
 	http_server_address,
-} = require("../../config.json");
+} = require("../../../config.json");
 
 module.exports = {
 	name: "get",

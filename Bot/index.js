@@ -4,14 +4,14 @@ const client = new Discord.Client();
 const {
 	token,
 	default_prefixes,
-} = require("./config.json");
+} = require("../config.json");
 
 const fs = require("fs");
 client.commands = new Discord.Collection();
-const commandCategories = fs.readdirSync("./Commands");
+const commandCategories = fs.readdirSync("./Bot/Commands");
 
 for (const category of commandCategories) {
-	const commandFiles = fs.readdirSync(`./Commands/${category}`);
+	const commandFiles = fs.readdirSync(`./Bot/Commands/${category}`);
 	for (const file of commandFiles) {
 		const command = require(`./Commands/${category}/${file}`);
 		client.commands.set(command.name, command);

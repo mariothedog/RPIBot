@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<body>
+		<h1>Raspberry Pi</h1>
+		<div id="gpio-checkboxes">
+			<ul style="list-style: none;" id="ul">
+				<li><input type="checkbox" name="GPIO 2 Checkbox" data-gpiopin=2 onclick="makePostRequest(this)"></li>
+				<li><input type="checkbox" name="GPIO 3 Checkbox" data-gpiopin=3 onclick="makePostRequest(this)"></li>
+				<li><input type="checkbox" name="GPIO 4 Checkbox" data-gpiopin=4 onclick="makePostRequest(this)"></li>
+				<li><input type="checkbox" name="GPIO 17 Checkbox" data-gpiopin=17 onclick="makePostRequest(this)"></li>
+				<li><input type="checkbox" name="GPIO 27 Checkbox" data-gpiopin=27 onclick="makePostRequest(this)"></li>
+				<li><input type="checkbox" name="GPIO 22 Checkbox" data-gpiopin=22 onclick="makePostRequest(this)"></li>
+				<li><input type="checkbox" name="GPIO 10 Checkbox" data-gpiopin=10 onclick="makePostRequest(this)"></li>
+				<li><input type="checkbox" name="GPIO 9 Checkbox" data-gpiopin=9 onclick="makePostRequest(this)"></li>
+				<li><input type="checkbox" name="GPIO 11 Checkbox" data-gpiopin=11 onclick="makePostRequest(this)"></li>
+				<li><input type="checkbox" name="GPIO 5 Checkbox" data-gpiopin=5 onclick="makePostRequest(this)"></li>
+				<li><input type="checkbox" name="GPIO 6 Checkbox" data-gpiopin=6 onclick="makePostRequest(this)"></li>
+				<li><input type="checkbox" name="GPIO 13 Checkbox" data-gpiopin=13 onclick="makePostRequest(this)"></li>
+				<li><input type="checkbox" name="GPIO 19 Checkbox" data-gpiopin=19 onclick="makePostRequest(this)"></li>
+				<li><input type="checkbox" name="GPIO 26 Checkbox" data-gpiopin=26 onclick="makePostRequest(this)"></li>
+				<li><input type="checkbox" name="GPIO 14 Checkbox" data-gpiopin=14 onclick="makePostRequest(this)"></li>
+				<li><input type="checkbox" name="GPIO 15 Checkbox" data-gpiopin=15 onclick="makePostRequest(this)"></li>
+				<li><input type="checkbox" name="GPIO 18 Checkbox" data-gpiopin=18 onclick="makePostRequest(this)"></li>
+				<li><input type="checkbox" name="GPIO 23 Checkbox" data-gpiopin=23 onclick="makePostRequest(this)"></li>
+				<li><input type="checkbox" name="GPIO 24 Checkbox" data-gpiopin=24 onclick="makePostRequest(this)"></li>
+				<li><input type="checkbox" name="GPIO 25 Checkbox" data-gpiopin=25 onclick="makePostRequest(this)"></li>
+				<li><input type="checkbox" name="GPIO 8 Checkbox" data-gpiopin=8 onclick="makePostRequest(this)"></li>
+				<li><input type="checkbox" name="GPIO 7 Checkbox" data-gpiopin=7 onclick="makePostRequest(this)"></li>
+				<li><input type="checkbox" name="GPIO 12 Checkbox" data-gpiopin=12 onclick="makePostRequest(this)"></li>
+				<li><input type="checkbox" name="GPIO 16 Checkbox" data-gpiopin=16 onclick="makePostRequest(this)"></li>
+				<li><input type="checkbox" name="GPIO 20 Checkbox" data-gpiopin=20 onclick="makePostRequest(this)"></li>
+				<li><input type="checkbox" name="GPIO 21 Checkbox" data-gpiopin=21 onclick="makePostRequest(this)"></li>
+			</ul>
+		</div>
+		<script>
+			function makePostRequest(checkbox) {
+				const data = {
+					gpioPin: parseInt(checkbox.dataset.gpiopin),
+					writeValue: checkbox.checked ? 1 : 0,
+				};
+				
+				const response = fetch("/", {
+					method: "POST",
+					body: JSON.stringify(data)
+				}).catch(err => {
+					console.error(err);
+				});
+			}
+		</script>
+	</body>
+</html>
