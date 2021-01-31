@@ -3,7 +3,7 @@ import os
 from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
 
-host_name = "" # Temporarily removed
+host_name = ""
 host_port = 8000
 
 gpio_pins = (
@@ -71,7 +71,7 @@ if __name__ == "__main__":
 	GPIO.setup(gpio_pins, GPIO.OUT)
 	
 	http_server = HTTPServer((host_name, host_port), Server)
-	print("Server Starts - %s:%s" % (host_name, host_port))
+	print("Server Ready")
 	try:
 		http_server.serve_forever()
 	except KeyboardInterrupt:
