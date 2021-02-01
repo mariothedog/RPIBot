@@ -1,0 +1,8 @@
+#gpio-pins {
+	list-style: none;
+}
+
+input {
+	position: fixed;
+	left: 115px;
+}
