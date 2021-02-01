@@ -1,80 +1,35 @@
-import RPi.GPIO as GPIO
-import os
-from http.server import BaseHTTPRequestHandler, HTTPServer
+from flask import Flask, render_template, request
 import json
+import RPi.GPIO as GPIO
 
-host_name = ""
-host_port = 8000
+with open("config.json", "r") as file:
+	CONFIG = json.load(file)
+server_host = CONFIG["server_host"]
+server_port = CONFIG["server_port"]
 
-gpio_pins = (
-	2,
-	3,
-	4,
-	17,
-	27,
-	22,
-	10,
-	9,
-	11,
-	5,
-	6,
-	13,
-	19,
-	26,
-	14,
-	15,
-	18,
-	23,
-	24,
-	25,
-	8,
-	7,
-	12,
-	16,
-	20,
-	21,
-)
+with open("static/gpio_pins.json", "r") as file:
+	GPIO_PINS = json.load(file)
 
-with open("index.html", "r") as file:
-	html = file.read()
+app = Flask(__name__, template_folder="")
+app.config["TEMPLATES_AUTO_RELOAD"] = True
+app.config["SEND_FILE_MAX_AGE_DEFAULT"] = 0
 
-
-class Server(BaseHTTPRequestHandler):
-	def do_HEAD(self):
-		self.send_response(200)
-		self.send_header('Content-type', 'text/html')
-		self.end_headers()
-	
-	def _redirect(self, path):
-		self.send_response(303)
-		self.send_header('Content-type', 'text/html')
-		self.send_header('Location', path)
-		self.end_headers()
-	
-	def do_GET(self):
-		self.do_HEAD()
-		self.wfile.write(html.encode("utf-8"))
-	
-	def do_POST(self):
-		content_length = int(self.headers['Content-Length'])
-		post_data_raw = self.rfile.read(content_length).decode("utf-8")
-		post_data = json.loads(post_data_raw)
-		
-		gpio_pin = post_data["gpioPin"]
-		write_value = post_data["writeValue"]
-		
+@app.route("/", methods=["GET", "POST"])
+def index():
+	if request.method == "POST":
+		data = request.json
+		gpio_pin = data["gpioPin"]
+		write_value = data["writeValue"]
 		GPIO.output(gpio_pin, write_value)
-		self._redirect("/")
+		return ("", 204)
+	else:
+		return render_template("index.html")
 
 if __name__ == "__main__":
 	GPIO.setmode(GPIO.BCM)
-	GPIO.setup(gpio_pins, GPIO.OUT)
+	GPIO.setup(GPIO_PINS, GPIO.OUT)
 	
-	http_server = HTTPServer((host_name, host_port), Server)
-	print("Server Ready")
 	try:
-		http_server.serve_forever()
-	except KeyboardInterrupt:
-		http_server.server_close()
+		app.run(host=server_host, port=server_port, debug=True, use_reloader=False)
 	finally:
 		GPIO.cleanup()
