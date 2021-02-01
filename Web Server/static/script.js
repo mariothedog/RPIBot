@@ -1,10 +1,10 @@
 jQuery.getJSON("static/gpio_pins.json", function(gpioPinNumbers) {
 	const gpioPins = document.getElementById("gpio-pins");
-	
+
 	for (let i = 0; i < gpioPinNumbers.length; i++) {
 		const pinNum = gpioPinNumbers[i];
 		const currentValue = gpioPinValues[i];
-		
+
 		const list = document.createElement("li");
 		const checkbox = document.createElement("input");
 		checkbox.type = "checkbox";
