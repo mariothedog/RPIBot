@@ -1,11 +1,11 @@
-jQuery.getJSON("static/gpio_pins.json", function (gpioPinNumbers) {
+jQuery.getJSON("static/gpio_pins.json", function(gpioPinNumbers) {
 	gpioPinNumbers.forEach(pinNum => {
 		const gpioPins = document.getElementById("gpio-pins");
 		const list = document.createElement("li");
 		const checkbox = document.createElement("input");
 		checkbox.type = "checkbox";
 		checkbox.dataset.gpiopin = pinNum;
-		checkbox.onclick = function () {
+		checkbox.onclick = function() {
 			makePostRequest(checkbox);
 		};
 		list.innerHTML = "GPIO " + pinNum;
@@ -26,10 +26,10 @@ function makePostRequest(checkbox) {
 		contentType: "application/json",
 		url: "/",
 		data: JSON.stringify(data),
-		success: function () {
+		success: function() {
 			console.log("Success at post request");
 		},
-		error: function () {
+		error: function() {
 			console.log("Error at post request");
 		},
 	});
