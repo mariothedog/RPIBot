@@ -5,27 +5,27 @@ const {
 
 module.exports = {
 	name: "toggle",
-	usage: "<GPIO pin number> <write value (0 or 1)>",
-	description: "Writes to the GPIO pin specified",
+	usage: "<GPIO pin number>",
+	description: "Toggles GPIO pin's state",
 	async execute(message, args) {
 		const pinNum = args[0];
-		let turnOn = args[1];
-		if (!pinNum || !turnOn) {
+		if (!pinNum) {
 			return false;
 		}
-		turnOn = turnOn.toLowerCase();
 
-		let writeValue = 0;
-		if (turnOn === "true") {
-			writeValue = 1;
-		}
-		else if (turnOn !== "false") {
-			writeValue = parseInt(turnOn);
-			if (isNaN(writeValue)) {
-				return false;
-			}
+		let pinValues;
+		await axios.get(http_server_address + "pin-values").then(response => {
+			pinValues = response.data;
+		});
+
+		const currentValue = pinValues[pinNum];
+		console.log(currentValue);
+		if (currentValue === undefined) {
+			message.reply("Please enter a valid GPIO pin number!");
+			return true;
 		}
 
+		const writeValue = currentValue ? 0 : 1;
 		await axios.post(http_server_address, {
 			gpioPin: parseInt(pinNum),
 			writeValue: writeValue,
