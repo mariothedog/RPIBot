@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from http import HTTPStatus
 import json
 import RPi.GPIO as GPIO
@@ -27,6 +27,11 @@ def index():
     else:
         gpio_pin_values = [GPIO.input(pin) for pin in GPIO_PINS]
         return render_template("index.html", gpio_pin_values=gpio_pin_values)
+
+@app.route("/pin-values")
+def pin_values():
+    gpio_pin_values = {pin: GPIO.input(pin) for pin in GPIO_PINS}
+    return jsonify(gpio_pin_values)
 
 
 if __name__ == "__main__":
