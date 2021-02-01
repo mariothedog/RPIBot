@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+from http import HTTPStatus
 import json
 import RPi.GPIO as GPIO
 
@@ -22,7 +23,7 @@ def index():
         gpio_pin = data["gpioPin"]
         write_value = data["writeValue"]
         GPIO.output(gpio_pin, write_value)
-        return ("", 204)
+        return ("", HTTPStatus.NO_CONTENT)
     else:
         gpio_pin_values = [GPIO.input(pin) for pin in GPIO_PINS]
         return render_template("index.html", gpio_pin_values=gpio_pin_values)
