@@ -24,7 +24,8 @@ def index():
         GPIO.output(gpio_pin, write_value)
         return ("", 204)
     else:
-        return render_template("index.html")
+        gpio_pin_values = [GPIO.input(pin) for pin in GPIO_PINS]
+        return render_template("index.html", gpio_pin_values=gpio_pin_values)
 
 
 if __name__ == "__main__":

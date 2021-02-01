@@ -1,17 +1,22 @@
 jQuery.getJSON("static/gpio_pins.json", function(gpioPinNumbers) {
-	gpioPinNumbers.forEach(pinNum => {
-		const gpioPins = document.getElementById("gpio-pins");
+	const gpioPins = document.getElementById("gpio-pins");
+	
+	for (let i = 0; i < gpioPinNumbers.length; i++) {
+		const pinNum = gpioPinNumbers[i];
+		const currentValue = gpioPinValues[i];
+		
 		const list = document.createElement("li");
 		const checkbox = document.createElement("input");
 		checkbox.type = "checkbox";
 		checkbox.dataset.gpiopin = pinNum;
+		checkbox.checked = currentValue;
 		checkbox.onclick = function() {
 			makePostRequest(checkbox);
 		};
 		list.innerHTML = "GPIO " + pinNum;
 		list.appendChild(checkbox);
 		gpioPins.appendChild(list);
-	});
+	}
 });
 
 
