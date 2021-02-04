@@ -19,7 +19,6 @@ module.exports = {
 		});
 
 		const currentValue = pinValues[pinNum];
-		console.log(currentValue);
 		if (currentValue === undefined) {
 			message.reply("Please enter a valid GPIO pin number!");
 			return true;
@@ -30,7 +29,6 @@ module.exports = {
 			gpioPin: parseInt(pinNum),
 			writeValue: writeValue,
 		}).then((result) => {
-			console.log(result);
 			message.reply(`GPIO pin number ${pinNum} was successfully written to with the value ${writeValue}`);
 		}).catch((error) => {
 			console.error(error);
