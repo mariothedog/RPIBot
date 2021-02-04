@@ -28,7 +28,7 @@ module.exports = {
 		await axios.post(http_server_address, {
 			gpioPin: parseInt(pinNum),
 			writeValue: writeValue,
-		}).then((result) => {
+		}).then(() => {
 			message.reply(`GPIO pin number ${pinNum} was successfully written to with the value ${writeValue}`);
 		}).catch((error) => {
 			console.error(error);
