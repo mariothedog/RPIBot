@@ -34,18 +34,21 @@ module.exports = {
 			return true;
 		}
 
-		const pinNum = gpio_bit_pins[bitNum];
-
-		await axios.post(http_server_address, {
-			gpioPin: pinNum,
-			writeValue: bitValue,
-		}).then(() => {
-			message.reply(`GPIO pin number ${pinNum} was successfully written to with the value ${bitValue}`);
-		}).catch((error) => {
-			console.error(error);
-			message.reply("An error occurred!");
-		});
+		this.setBit(bitNum, bitValue);
 
 		return true;
+	},
+
+	setBit(bitNum, bitValue) {
+		const {
+			gpio_bit_pins,
+		} = require("../../user-config.json");
+
+		const pinNum = gpio_bit_pins[bitNum];
+
+		axios.post(http_server_address, {
+			gpioPin: pinNum,
+			writeValue: bitValue,
+		});
 	},
 };
