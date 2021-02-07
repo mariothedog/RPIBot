@@ -9,8 +9,6 @@ module.exports = {
 	usage: "<Number of bits (n > 0)> <GPIO Number for bit 0> <... up to bit n-1>",
 	description: "Configure the GPIO numbers for each bit (0-n)",
 	async execute(message, args) {
-		const userConfig = require("../../user-config.json");
-
 		const numBits = parseInt(args[0]);
 		if (numBits <= 0) {
 			return false;
@@ -31,6 +29,7 @@ module.exports = {
 			return true;
 		}
 
+		const userConfig = require("../../user-config.json");
 		userConfig["num_bits"] = numBits;
 		userConfig["gpio_bit_pins"] = gpioNums;
 
