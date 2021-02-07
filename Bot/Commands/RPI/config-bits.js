@@ -36,6 +36,8 @@ module.exports = {
 
 		fs.writeFileSync("Bot/user-config.json", JSON.stringify(userConfig, null, 4));
 
+		message.reply("Bits successfully configured!");
+
 		return true;
 	},
 };
