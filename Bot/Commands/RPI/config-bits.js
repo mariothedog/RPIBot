@@ -3,14 +3,14 @@ const axios = require("axios");
 const {
 	http_server_address,
 } = require("../../../config.json");
-const userConfig = fs.existsSync("../../user-config.json") ?
-	require("../../user-config.json") : {};
 
 module.exports = {
 	name: "config-bits",
 	usage: "<Number of bits (n > 0)> <GPIO Number for bit 0> <... up to bit n-1>",
 	description: "Configure the GPIO numbers for each bit (0-n)",
 	async execute(message, args) {
+		const userConfig = require("../../user-config.json");
+
 		const numBits = parseInt(args[0]);
 		if (numBits <= 0) {
 			return false;

@@ -7,6 +7,11 @@ const {
 } = require("../config.json");
 
 const fs = require("fs");
+
+if (!fs.existsSync("Bot/user-config.json")) {
+	fs.writeFileSync("Bot/user-config.json", "{}");
+}
+
 client.commands = new Discord.Collection();
 const commandCategories = fs.readdirSync("./Bot/Commands");
 
@@ -23,7 +28,9 @@ client.login(token);
 client.once("ready", () => {
 	client.user.setPresence({
 		status: "online",
-		game: { name: "m!help | Made by Mariothedog#4707" },
+		game: {
+			name: "m!help | Made by Mariothedog#4707"
+		},
 	});
 
 	console.log("Ready!");
@@ -75,8 +82,7 @@ client.on("message", async message => {
 		if (!await command.execute(message, args, prefixUsed)) {
 			return message.reply(`Invalid Usage! Correct usage: ${prefixUsed}${commandName} ${command.usage}`);
 		}
-	}
-	catch (error) {
+	} catch (error) {
 		console.error(error);
 		return message.reply("There was an issue executing that command!");
 	}
