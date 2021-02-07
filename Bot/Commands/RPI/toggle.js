@@ -6,7 +6,7 @@ const {
 module.exports = {
 	name: "toggle",
 	usage: "<GPIO pin number>",
-	description: "Toggles GPIO pin's state",
+	description: "Toggles the GPIO pin's state",
 	async execute(message, args) {
 		const pinNum = args[0];
 		if (!pinNum) {
