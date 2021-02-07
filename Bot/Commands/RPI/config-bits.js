@@ -8,7 +8,7 @@ const userConfig = fs.existsSync("../../user-config.json") ?
 
 module.exports = {
 	name: "config-bits",
-	usage: "<Num bits (n > 0)> <GPIO Number for bit 0> <... up to bit n-1>",
+	usage: "<Number of bits (n > 0)> <GPIO Number for bit 0> <... up to bit n-1>",
 	description: "Configure the GPIO numbers for each bit (0-n)",
 	async execute(message, args) {
 		const numBits = parseInt(args[0]);
