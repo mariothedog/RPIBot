@@ -29,7 +29,7 @@ client.once("ready", () => {
 	client.user.setPresence({
 		status: "online",
 		game: {
-			name: "m!help | Made by Mariothedog#4707"
+			name: "m!help | Made by Mariothedog#4707",
 		},
 	});
 
