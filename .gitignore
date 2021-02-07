@@ -1,3 +1,4 @@
 node_modules/
 config.json
+Bot/user-config.json
 json.sqlite
