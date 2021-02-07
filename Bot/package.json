@@ -1,25 +1,25 @@
 {
-  "name": "RPIBot",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mariothedog/RPIBot.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/mariothedog/RPIBot/issues"
-  },
-  "homepage": "https://github.com/mariothedog/RPIBot#readme",
-  "dependencies": {
-    "axios": "^0.21.1",
-    "discord.js": "^12.5.1",
-    "eslint": "^7.8.1"
-  }
+	"name": "RPIBot",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/mariothedog/RPIBot.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/mariothedog/RPIBot/issues"
+	},
+	"homepage": "https://github.com/mariothedog/RPIBot#readme",
+	"dependencies": {
+		"axios": "^0.21.1",
+		"discord.js": "^12.5.1",
+		"eslint": "^7.8.1"
+	}
 }

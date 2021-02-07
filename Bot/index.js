@@ -82,7 +82,8 @@ client.on("message", async message => {
 		if (!await command.execute(message, args, prefixUsed)) {
 			return message.reply(`Invalid Usage! Correct usage: ${prefixUsed}${commandName} ${command.usage}`);
 		}
-	} catch (error) {
+	}
+	catch (error) {
 		console.error(error);
 		return message.reply("There was an issue executing that command!");
 	}

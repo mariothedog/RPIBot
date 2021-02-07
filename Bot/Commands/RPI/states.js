@@ -18,10 +18,15 @@ module.exports = {
 		const embed = new Discord.MessageEmbed()
 			.setColor("#bc1142")
 			.setTitle("GPIO Pin States")
-			.addFields(
-				{ name: "\u200B", value: formatPins(gpioPins.slice(0, height), pinValues), inline: true },
-				{ name: "\u200B", value: formatPins(gpioPins.slice(height), pinValues), inline: true },
-			)
+			.addFields({
+				name: "\u200B",
+				value: formatPins(gpioPins.slice(0, height), pinValues),
+				inline: true
+			}, {
+				name: "\u200B",
+				value: formatPins(gpioPins.slice(height), pinValues),
+				inline: true
+			}, )
 			.setTimestamp();
 
 		message.channel.send(embed);
