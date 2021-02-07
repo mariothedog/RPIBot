@@ -8,7 +8,7 @@ module.exports = {
 	usage: "<GPIO pin number>",
 	description: "Toggles the GPIO pin's state",
 	async execute(message, args) {
-		const pinNum = args[0];
+		const pinNum = parseInt(args[0]);
 		if (!pinNum) {
 			return false;
 		}
@@ -26,7 +26,7 @@ module.exports = {
 
 		const writeValue = currentValue ? 0 : 1;
 		await axios.post(http_server_address, {
-			gpioPin: parseInt(pinNum),
+			gpioPin: pinNum,
 			writeValue: writeValue,
 		}).then(() => {
 			message.reply(`GPIO pin number ${pinNum} was successfully written to with the value ${writeValue}`);
