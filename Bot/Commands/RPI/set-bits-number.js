@@ -2,12 +2,16 @@ const setBit = require("./set-bit.js");
 
 module.exports = {
 	name: "set-bits-number",
-	usage: "<Number>",
+	usage: "<Number (n > 0)>",
 	description: "Sets the corresponding bits based on the number in binary",
 	async execute(message, args) {
 		let number = parseInt(args[0]);
 		if (isNaN(number)) {
 			return false;
+		}
+		else if (number < 0) {
+			message.reply("The number must be greater than or equal to 0!");
+			return true;
 		}
 
 		const {
