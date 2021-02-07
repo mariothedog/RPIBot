@@ -5,7 +5,7 @@ const {
 } = require("../../../config.json");
 
 module.exports = {
-	name: "config-bits",
+	name: "set-bits-config",
 	usage: "<Number of bits (n > 0)> <GPIO Number for bit 0> <... up to bit n-1>",
 	description: "Configure the GPIO numbers for each bit (0-n)",
 	async execute(message, args) {
