@@ -1,18 +1,12 @@
 const Discord = require("discord.js");
-const axios = require("axios");
-const {
-	http_server_address,
-} = require("../../../config.json");
+const util = require("../../util.js");
 const gpioPins = require("../../../Web Server/static/gpio_pins.json");
 
 module.exports = {
 	name: "states",
 	description: "Returns the state of every GPIO pin",
 	async execute(message) {
-		let pinValues;
-		await axios.get(http_server_address + "pin-values").then(response => {
-			pinValues = response.data;
-		});
+		const pinValues = await util.getPinValues();
 
 		const height = 14;
 		const embed = new Discord.MessageEmbed()

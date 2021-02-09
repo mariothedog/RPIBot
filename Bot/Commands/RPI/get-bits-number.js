@@ -1,7 +1,4 @@
-const axios = require("axios");
-const {
-	http_server_address,
-} = require("../../../config.json");
+const util = require("../../util.js");
 
 module.exports = {
 	name: "get-bits-number",
@@ -12,10 +9,7 @@ module.exports = {
 			gpio_bit_pins,
 		} = require("../../user-config.json");
 
-		let pinValues;
-		await axios.get(http_server_address + "pin-values").then(response => {
-			pinValues = response.data;
-		});
+		const pinValues = await util.getPinValues();
 
 		let number = 0;
 		for (let i = 0; i < num_bits; i++) {

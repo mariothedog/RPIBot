@@ -2,6 +2,7 @@ const axios = require("axios");
 const {
 	http_server_address,
 } = require("../../../config.json");
+const util = require("../../util.js");
 
 module.exports = {
 	name: "toggle",
@@ -13,10 +14,7 @@ module.exports = {
 			return false;
 		}
 
-		let pinValues;
-		await axios.get(http_server_address + "pin-values").then(response => {
-			pinValues = response.data;
-		});
+		const pinValues = await util.getPinValues();
 
 		const currentValue = pinValues[pinNum];
 		if (currentValue === undefined) {

@@ -1,8 +1,5 @@
 const fs = require("fs");
-const axios = require("axios");
-const {
-	http_server_address,
-} = require("../../../config.json");
+const util = require("../../util.js");
 
 module.exports = {
 	name: "set-bits-config",
@@ -19,10 +16,7 @@ module.exports = {
 			return false;
 		}
 
-		let pinValues;
-		await axios.get(http_server_address + "pin-values").then(response => {
-			pinValues = response.data;
-		});
+		const pinValues = await util.getPinValues();
 
 		if (gpioNums.some(p => pinValues[p] === undefined)) {
 			message.reply("All GPIO pin numbers must be valid!");
