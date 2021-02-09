@@ -84,6 +84,7 @@ client.on("message", async message => {
 		}
 	}
 	catch (error) {
+		console.log(`Error caught while executing the ${command.name} command`);
 		console.error(error);
 		return message.reply("There was an issue executing that command!");
 	}

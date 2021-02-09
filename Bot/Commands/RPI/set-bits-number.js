@@ -1,4 +1,4 @@
-const setBit = require("./set-bit.js");
+const util = require("../../util.js");
 
 module.exports = {
 	name: "set-bits-number",
@@ -24,21 +24,16 @@ module.exports = {
 			return true;
 		}
 
-		function errorHandler(error) {
-			console.log(error);
-			message.reply("An error occurred!");
-		}
-
 		let bitNum = 0;
 		while (number >= 1) {
 			const bitValue = number % 2;
-			if (setBit.setBit(bitNum, bitValue, errorHandler)) return true;
+			await util.setBit(bitNum, bitValue);
 			number = Math.floor(number / 2);
 			bitNum++;
 		}
 
 		for (bitNum; bitNum < num_bits; bitNum++) {
-			if (setBit.setBit(bitNum, 0, errorHandler)) return true;
+			await util.setBit(bitNum, 0);
 		}
 
 		return true;
