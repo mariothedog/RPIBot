@@ -24,16 +24,21 @@ module.exports = {
 			return true;
 		}
 
+		function errorHandler(error) {
+			console.log(error);
+			message.reply("An error occurred!");
+		}
+
 		let bitNum = 0;
 		while (number >= 1) {
 			const bitValue = number % 2;
-			setBit.setBit(bitNum, bitValue);
+			if (setBit.setBit(bitNum, bitValue, errorHandler)) return true;
 			number = Math.floor(number / 2);
 			bitNum++;
 		}
 
 		for (bitNum; bitNum < num_bits; bitNum++) {
-			setBit.setBit(bitNum, 0);
+			if (setBit.setBit(bitNum, 0, errorHandler)) return true;
 		}
 
 		return true;

@@ -34,21 +34,29 @@ module.exports = {
 			return true;
 		}
 
-		this.setBit(bitNum, bitValue);
+		this.setBit(bitNum, bitValue, (error) => {
+			console.log(error);
+			message.reply("An error occurred!");
+		});
 
 		return true;
 	},
 
-	setBit(bitNum, bitValue) {
+	setBit(bitNum, bitValue, errorHandler) {
 		const {
 			gpio_bit_pins,
 		} = require("../../user-config.json");
 
 		const pinNum = gpio_bit_pins[bitNum];
 
+		let errorOccurred = false;
 		axios.post(http_server_address, {
 			gpioPin: pinNum,
 			writeValue: bitValue,
+		}).catch(error => {
+			errorOccurred = true;
+			errorHandler(error);
 		});
+		return errorOccurred;
 	},
 };
