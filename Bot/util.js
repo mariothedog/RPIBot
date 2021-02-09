@@ -19,26 +19,23 @@ module.exports = {
 		});
 	},
 
-	async setBit(bitNum, bitValue) {
-		const {
-			gpio_bit_pins,
-		} = require("./user-config.json");
+	async getGPIOBitPins() {
+		return require("./user-config.json").gpio_bit_pins;
+	},
 
-		const pinNum = gpio_bit_pins[bitNum];
+	async setBit(bitNum, bitValue) {
+		const gpioBitPins = this.getGPIOBitPins();
+		const pinNum = gpioBitPins[bitNum];
 		await this.setGPIOPin(pinNum, bitValue);
 	},
 
 	async getBitsNumber() {
-		const {
-			num_bits,
-			gpio_bit_pins,
-		} = require("./user-config.json");
-
+		const gpioBitPins = require("./user-config.json").gpio_bit_pins;
 		const pinValues = await this.getPinValues();
 
 		let number = 0;
-		for (let i = 0; i < num_bits; i++) {
-			const bitPin = gpio_bit_pins[i];
+		for (let i = 0; i < gpioBitPins.length; i++) {
+			const bitPin = gpioBitPins[i];
 			if (pinValues[bitPin]) {
 				number += 2 ** i;
 			}
