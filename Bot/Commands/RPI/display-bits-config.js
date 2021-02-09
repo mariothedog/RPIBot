@@ -1,9 +1,15 @@
+const util = require("../../util");
+
 module.exports = {
 	name: "display-bits-config",
 	description: "Display the bits config",
-	async execute(message) {
-		const userConfig = require("../../user-config.json");
-		const gpioBitPinsFormatted = Array.prototype.join.call(userConfig["gpio_bit_pins"], ", ");
+	async execute(message, _args, prefixUsed) {
+		const gpioBitPins = await util.getGPIOBitPins();
+		if (!gpioBitPins) {
+			message.reply(`Please run ${prefixUsed}config-bits first!`);
+			return true;
+		}
+		const gpioBitPinsFormatted = Array.prototype.join.call(gpioBitPins, ", ");
 		message.reply(`\n**GPIO Bit Pins:** ${gpioBitPinsFormatted}`);
 		return true;
 	},
