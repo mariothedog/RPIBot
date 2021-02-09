@@ -27,4 +27,22 @@ module.exports = {
 		const pinNum = gpio_bit_pins[bitNum];
 		await this.setGPIOPin(pinNum, bitValue);
 	},
+
+	async getBitsNumber() {
+		const {
+			num_bits,
+			gpio_bit_pins,
+		} = require("./user-config.json");
+
+		const pinValues = await this.getPinValues();
+
+		let number = 0;
+		for (let i = 0; i < num_bits; i++) {
+			const bitPin = gpio_bit_pins[i];
+			if (pinValues[bitPin]) {
+				number += 2 ** i;
+			}
+		}
+		return number;
+	},
 };
