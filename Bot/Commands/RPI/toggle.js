@@ -20,6 +20,7 @@ module.exports = {
 
 		const writeValue = currentValue ? 0 : 1;
 		util.setGPIOPin(pinNum, writeValue);
+		message.reply(`GPIO pin number ${pinNum} was successfully written to with the value ${writeValue}`);
 
 		return true;
 	},
