@@ -12,7 +12,7 @@ module.exports = {
 
 				const data = getCommandList(message.client, prefixUsed, message.channel.nsfw);
 				return message.channel.send(data, {
-					split: true
+					split: true,
 				});
 			}
 
@@ -29,13 +29,13 @@ module.exports = {
 			data.push(`**Usage:** ${prefixUsed}${commandName} ${command.usage ? command.usage : ""}`);
 
 			return message.channel.send(data, {
-				split: true
+				split: true,
 			});
 		}
 
 		const data = getCommandList(message.client, prefixUsed, message.channel.nsfw);
 		return message.channel.send(data, {
-			split: true
+			split: true,
 		});
 	},
 };
@@ -47,7 +47,8 @@ function getCommandList(client, prefix, nsfwCommandsAllowed) {
 	data.push("__**Commands list:**__");
 	if (nsfwCommandsAllowed) {
 		data.push(commands.map(command => `**${prefix}${command.name}** - ${command.description}`).join("\n"));
-	} else {
+	}
+	else {
 		data.push(commands.filter(command => !command.nsfw).map(command => `**${prefix}${command.name}** - ${command.description}`).join("\n"));
 	}
 
