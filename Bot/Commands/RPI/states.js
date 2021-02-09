@@ -21,12 +21,12 @@ module.exports = {
 			.addFields({
 				name: "\u200B",
 				value: formatPins(gpioPins.slice(0, height), pinValues),
-				inline: true
+				inline: true,
 			}, {
 				name: "\u200B",
 				value: formatPins(gpioPins.slice(height), pinValues),
-				inline: true
-			}, )
+				inline: true,
+			})
 			.setTimestamp();
 
 		message.channel.send(embed);
