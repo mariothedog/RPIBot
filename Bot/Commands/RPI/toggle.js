@@ -1,7 +1,3 @@
-const axios = require("axios");
-const {
-	http_server_address,
-} = require("../../../config.json");
 const util = require("../../util.js");
 
 module.exports = {
@@ -23,15 +19,7 @@ module.exports = {
 		}
 
 		const writeValue = currentValue ? 0 : 1;
-		await axios.post(http_server_address, {
-			gpioPin: pinNum,
-			writeValue: writeValue,
-		}).then(() => {
-			message.reply(`GPIO pin number ${pinNum} was successfully written to with the value ${writeValue}`);
-		}).catch((error) => {
-			console.error(error);
-			message.reply("An error occurred!");
-		});
+		util.setGPIOPin(pinNum, writeValue);
 
 		return true;
 	},
