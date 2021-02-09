@@ -5,12 +5,8 @@ module.exports = {
 	usage: "<Bit number> <Value (0 or 1)>",
 	description: "Set the bit's value",
 	async execute(message, args, prefixUsed) {
-		const {
-			num_bits,
-			gpio_bit_pins,
-		} = require("../../user-config.json");
-
-		if (!num_bits || !gpio_bit_pins) {
+		const gpioBitPins = await util.getGPIOBitPins();
+		if (!gpioBitPins) {
 			message.reply(`Please run ${prefixUsed}config-bits first!`);
 			return true;
 		}
@@ -21,8 +17,9 @@ module.exports = {
 			return false;
 		}
 
-		if (bitNum < 0 || bitNum >= num_bits) {
-			message.reply(`The bit number is not within the range configured: 0 - ${num_bits - 1}`);
+		const numBits = gpioBitPins.length;
+		if (bitNum < 0 || bitNum >= numBits) {
+			message.reply(`The bit number is not within the range configured: 0 - ${numBits - 1}`);
 			return true;
 		}
 

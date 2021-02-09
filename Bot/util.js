@@ -24,7 +24,7 @@ module.exports = {
 	},
 
 	async setBit(bitNum, bitValue) {
-		const gpioBitPins = this.getGPIOBitPins();
+		const gpioBitPins = await this.getGPIOBitPins();
 		const pinNum = gpioBitPins[bitNum];
 		await this.setGPIOPin(pinNum, bitValue);
 	},

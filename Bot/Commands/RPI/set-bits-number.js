@@ -8,7 +8,8 @@ module.exports = {
 		let number = parseInt(args[0]);
 		if (isNaN(number)) {
 			return false;
-		} else if (number < 0) {
+		}
+		else if (number < 0) {
 			message.reply("The number must be greater than or equal to 0!");
 			return true;
 		}
