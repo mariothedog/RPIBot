@@ -1,4 +1,5 @@
 const util = require("../../util");
+const setBitsConfig = require("./set-bits-config");
 
 module.exports = {
 	name: "set-bit",
@@ -7,7 +8,7 @@ module.exports = {
 	async execute(message, args, prefixUsed) {
 		const gpioBitPins = await util.getGPIOBitPins();
 		if (!gpioBitPins) {
-			message.reply(`Please run ${prefixUsed}config-bits first!`);
+			message.reply(`Please run ${prefixUsed}${setBitsConfig.name} first!`);
 			return true;
 		}
 
