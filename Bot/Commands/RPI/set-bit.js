@@ -29,6 +29,7 @@ module.exports = {
 		}
 
 		await util.setBit(bitNum, bitValue);
+		message.reply(`Bit number ${bitNum} was successfully written to with the value ${bitValue}`);
 
 		return true;
 	},
