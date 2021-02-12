@@ -12,7 +12,7 @@ module.exports = {
 			return true;
 		}
 
-		let number = parseInt(args[0]);
+		const number = parseInt(args[0]);
 		if (isNaN(number)) {
 			return false;
 		}
@@ -21,24 +21,13 @@ module.exports = {
 			return true;
 		}
 
-		const numBits = util.getNumBits();
-		const maxNum = 2 ** numBits - 1;
+		const maxNum = 2 ** util.getNumBits() - 1;
 		if (number > maxNum) {
 			message.reply("There aren't enough bits available to display that number!");
 			return true;
 		}
 
-		let bitNum = 0;
-		while (number >= 1) {
-			const bitValue = number % 2;
-			await util.setBit(bitNum, bitValue);
-			number = Math.floor(number / 2);
-			bitNum++;
-		}
-
-		for (bitNum; bitNum < numBits; bitNum++) {
-			await util.setBit(bitNum, 0);
-		}
+		util.setBitsNumber(number);
 
 		return true;
 	},

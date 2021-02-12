@@ -46,4 +46,18 @@ module.exports = {
 		}
 		return number;
 	},
+
+	async setBitsNumber(number) {
+		let bitNum = 0;
+		while (number >= 1) {
+			const bitValue = number % 2;
+			await this.setBit(bitNum, bitValue);
+			number = Math.floor(number / 2);
+			bitNum++;
+		}
+
+		for (bitNum; bitNum < this.getNumBits(); bitNum++) {
+			await this.setBit(bitNum, 0);
+		}
+	},
 };
