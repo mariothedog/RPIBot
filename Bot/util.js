@@ -4,6 +4,15 @@ const {
 } = require("../config.json");
 
 module.exports = {
+	setAsyncTimeout(callback, ms) {
+		return new Promise(resolve => {
+			setTimeout(async () => {
+				await callback();
+				resolve();
+			}, ms);
+		});
+	},
+
 	async getPinValues() {
 		let pinValues;
 		await axios.get(http_server_address + "pin-values").then(response => {
