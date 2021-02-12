@@ -19,8 +19,12 @@ module.exports = {
 		});
 	},
 
-	async getGPIOBitPins() {
+	getGPIOBitPins() {
 		return require("./user-config.json").gpio_bit_pins;
+	},
+
+	getNumBits() {
+		return this.getGPIOBitPins().length;
 	},
 
 	async setBit(bitNum, bitValue) {

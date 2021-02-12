@@ -21,11 +21,8 @@ module.exports = {
 			return true;
 		}
 
-		const {
-			num_bits,
-		} = require("../../user-config.json");
-
-		const maxNum = 2 ** num_bits - 1;
+		const numBits = util.getNumBits();
+		const maxNum = 2 ** numBits - 1;
 		if (number > maxNum) {
 			message.reply("There aren't enough bits available to display that number!");
 			return true;
@@ -39,7 +36,7 @@ module.exports = {
 			bitNum++;
 		}
 
-		for (bitNum; bitNum < num_bits; bitNum++) {
+		for (bitNum; bitNum < numBits; bitNum++) {
 			await util.setBit(bitNum, 0);
 		}
 
