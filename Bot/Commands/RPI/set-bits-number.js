@@ -27,7 +27,8 @@ module.exports = {
 			return true;
 		}
 
-		util.setBitsNumber(number);
+		await util.setBitsNumber(number);
+		message.reply(`Bits number successfully set to ${number}!`);
 
 		return true;
 	},
