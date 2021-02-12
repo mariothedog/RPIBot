@@ -21,8 +21,7 @@ module.exports = {
 			return true;
 		}
 
-		const maxNum = 2 ** util.getNumBits() - 1;
-		if (number > maxNum) {
+		if (number > util.getMaxBitsNum()) {
 			message.reply("There aren't enough bits available to display that number!");
 			return true;
 		}

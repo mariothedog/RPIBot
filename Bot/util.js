@@ -27,8 +27,12 @@ module.exports = {
 		return this.getGPIOBitPins().length;
 	},
 
+	getMaxBitsNum() {
+		return 2 ** this.getNumBits() - 1;
+	},
+
 	async setBit(bitNum, bitValue) {
-		const gpioBitPins = await this.getGPIOBitPins();
+		const gpioBitPins = this.getGPIOBitPins();
 		const pinNum = gpioBitPins[bitNum];
 		await this.setGPIOPin(pinNum, bitValue);
 	},
