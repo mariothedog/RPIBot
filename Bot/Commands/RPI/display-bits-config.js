@@ -4,7 +4,7 @@ module.exports = {
 	name: "display-bits-config",
 	description: "Display the bits config",
 	async execute(message, _args, prefixUsed) {
-		const gpioBitPins = await util.getGPIOBitPins();
+		const gpioBitPins = util.getGPIOBitPins();
 		if (!gpioBitPins) {
 			message.reply(`Please run ${prefixUsed}config-bits first!`);
 			return true;

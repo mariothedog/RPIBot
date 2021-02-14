@@ -6,7 +6,7 @@ module.exports = {
 	usage: "<Number (n > 0)> <Should transition to number (true/false)> <Transition increment delay (ms)>",
 	description: "Adds the number to the binary display",
 	async execute(message, args, prefixUsed) {
-		const gpioBitPins = await util.getGPIOBitPins();
+		const gpioBitPins = util.getGPIOBitPins();
 		if (!gpioBitPins) {
 			message.reply(`Please run ${prefixUsed}${setBitsConfig.name} first!`);
 			return true;

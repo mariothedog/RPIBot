@@ -6,7 +6,7 @@ module.exports = {
 	usage: "<Bit number> <Value (0 or 1)>",
 	description: "Set the bit's value",
 	async execute(message, args, prefixUsed) {
-		const gpioBitPins = await util.getGPIOBitPins();
+		const gpioBitPins = util.getGPIOBitPins();
 		if (!gpioBitPins) {
 			message.reply(`Please run ${prefixUsed}${setBitsConfig.name} first!`);
 			return true;
